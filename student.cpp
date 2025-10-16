@@ -1,59 +1,65 @@
 #include <iostream>
 #include <string>
 #include "student.h"
+#include "group.h"
 using namespace std;
 
 Student::Student() {
-	cout << "Input name: ";
-	cin >> name;
-	cout << "Input surname: ";
-	cin >> surname;
-	cout << "Input patronymic: ";
-	cin >> patronymic;
-	cout << "Input numberZalBook: ";
-	cin >> numberZalBook;
-	cout << "input type: ";
-	cin >> type;
+    cout << "Input name: ";
+    cin >> name;
+    cout << "Input surname: ";
+    cin >> surname;
+    cout << "Input patronymic: ";
+    cin >> patronymic;
+    cout << "Input numberZalBook: ";
+    cin >> numberZalBook;
+    cout << "Input type: ";
+    cin >> type;
 }
 
 Student::Student(string name, string surname, string patronymic, int numberZalBook, bool type) {
-	this->name = name;
-	this->surname = surname;
-	this->patronymic = patronymic;
-	this->numberZalBook = numberZalBook;
-	this->type = type;
+    this->name = name;
+    this->surname = surname;
+    this->patronymic = patronymic;
+    this->numberZalBook = numberZalBook;
+    this->type = type;
 }
 
-void Student::setSurname(string surname) { this->surname = surname; };
-
-void Student::setName(string name) { this->name = name; };
-
-void Student::setPatronymic(string patronymic) { this->patronymic = surname; };
-
-void Student::setNumberZalBook(int numberZalBook) { this->numberZalBook = numberZalBook; };
-
-void Student::setType(bool type) { this->type = type; };
-
-string Student::getSurname() { return surname; };
-string Student::getName() { return name; };
-string Student::getPatronymic() { return surname; };
-int Student::getNumberZalBook() { return numberZalBook; };
-bool Student::getType() { return type; };
-
-ostream& operator << (std::ostream& os, const Student& obj) {
-	os << "Name: " << obj.name << "Surname: " << obj.surname << "Patronymic"
-		<< obj.patronymic << "NumberZalBook: " << obj.numberZalBook << "Type: " << obj.type;
-	return os;
+Student::Student(const Student& student) {
+    name = student.name;
+    surname = student.surname;
+    patronymic = student.patronymic;
+    numberZalBook = student.numberZalBook;
+    type = student.type;
 }
 
-Student::~Student() {
+Student::~Student() {}
 
-}
+void Student::setName(string name) { this->name = name; }
+string Student::getName() { return name; }
 
-int main() {
-	Student student1;
-	Student student2("Marian", "Perchyshyn", "Patronymic", 12, true);
-	Student student3 = student2;
+void Student::setSurname(string surname) { this->surname = surname; }
+string Student::getSurname() { return surname; }
 
-	return 0;
+void Student::setPatronymic(string patronymic) { this->patronymic = patronymic; }
+string Student::getPatronymic() { return patronymic; }
+
+void Student::setNumberZalBook(int numberZalBook) { this->numberZalBook = numberZalBook; }
+int Student::getNumberZalBook() { return numberZalBook; }
+
+void Student::setType(bool type) { this->type = type; }
+bool Student::getType() { return type; }
+
+ostream& operator<<(ostream& os, const Student& student) {
+    os << "Name: " << student.name
+        << "\tSurname: " << student.surname
+        << "\tPatronymic: " << student.patronymic
+        << "\tNumberZalBook: " << student.numberZalBook;
+	if (student.type) {
+		os << "\tType: budget";
+	}
+	else {
+		os << "\tType: contract";
+	}
+    return os;
 }
